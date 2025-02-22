@@ -1,0 +1,9 @@
+.calendar-style {
+  width: 200px;
+}
+
+::ng-deep .selected-day {
+  background-color: green !important;
+  color: white !important;
+  border-radius: 50% !important;
+}

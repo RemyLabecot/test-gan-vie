@@ -1,0 +1,19 @@
+<div>
+  <label for="agent-select">Sélectionner un agent :</label>
+  <select id="agent-select" (change)="onAgentSelected($event)">
+    @for(agent of craGeneratorStore.getAgentsByCurrentProject(); track agent.id) {
+      <option [value]="agent.id" [selected]="agent.id === 1">
+        {{ agent.nom }}
+      </option>
+    }
+  </select>
+</div>
+
+<div>
+  <mat-calendar
+      class="calendar-style"
+      [selected]="null"
+                (selectedChange)="toggleDate($event)"
+                [dateClass]="dateClass()" [dateFilter]="dateFilter"
+                ></mat-calendar>
+</div>

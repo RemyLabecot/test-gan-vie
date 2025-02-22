@@ -1,0 +1,25 @@
+<div class="app-container">
+  <section class="project-selection">
+    <h2>Sélectionnez un projet</h2>
+    <div class="project-list">
+      <button (click)="selectProject(ProjectsEnum.PROJECT_1)">{{ ProjectsEnum.PROJECT_1 }}</button>
+      <button (click)="selectProject(ProjectsEnum.PROJECT_2)">{{ ProjectsEnum.PROJECT_2 }}</button>
+      <button (click)="selectProject(ProjectsEnum.PROJECT_3)">{{ ProjectsEnum.PROJECT_3 }}</button>
+    </div>
+  </section>
+
+  <section class="imputation-section">
+    <h2>Imputations pour l'{{ craGeneratorStore.getAgentByCurrentAgentId().nom }} sur le projet {{craGeneratorStore.getProjectByCurrentProjectId().nom}}</h2>
+    <div class="imputation-content">
+      <app-date-picker
+      ></app-date-picker>
+      <app-agent-imputations
+      ></app-agent-imputations>
+    </div>
+  </section>
+
+  <section class="summary-section">
+    <h2>Résumé des trois derniers mois</h2>
+    <app-summary></app-summary>
+  </section>
+</div>
