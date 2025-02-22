@@ -1,16 +1,11 @@
 @media (max-width: 768px) {
-  .imputation-content {
+  .allocation-content {
     flex-direction: column;
     align-items: center;
   }
   .banner {
     font-size: 20px;
   }
-}
-.app-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
 }
 
 .banner {
@@ -25,15 +20,24 @@
   text-align: center;
 }
 
-.imputation-section, .summary-section {
-  margin: 20px auto;
+.app-container {
   padding: 20px;
-  max-width: 900px;
+  max-width: 1200px;
+  margin: auto;
+  .allocation-section, &.summary-section {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 900px;
+  }
+  .allocation-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    .allocation-selector {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
-.imputation-content {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-}

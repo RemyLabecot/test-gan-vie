@@ -46,8 +46,8 @@ export class DatePickerComponent {
   constructor() {
     this.setCurrentMonth();
     effect(() => {
-      this.monthDaysWorked = this.craGeneratorStore.getNumberOfImputationsDaysByMonthAndType('workingDay', this.craGeneratorStore.currentSelectedAgentId(), this.craGeneratorStore.currentMonth());
-      this.monthDaysOff = this.craGeneratorStore.getNumberOfImputationsDaysByMonthAndType('dayOff', this.craGeneratorStore.currentSelectedAgentId(), this.craGeneratorStore.currentMonth());
+      this.monthDaysWorked = this.craGeneratorStore.getNumberOfAllocationsDaysByMonthAndType('workingDay', this.craGeneratorStore.currentSelectedAgentId(), this.craGeneratorStore.currentMonth());
+      this.monthDaysOff = this.craGeneratorStore.getNumberOfAllocationsDaysByMonthAndType('dayOff', this.craGeneratorStore.currentSelectedAgentId(), this.craGeneratorStore.currentMonth());
       if(this.craGeneratorStore.refreshCalendar()) {
         this.refreshCalendar();
       }
@@ -77,12 +77,12 @@ export class DatePickerComponent {
 
     return (date: Date): string => {
       const dateString = toFullDateString(date);
-      const imputationsMois = this.craGeneratorStore.getImputationsByCurrentAgent();
+      const allocationsByMonth = this.craGeneratorStore.getAllocationsByCurrentAgent();
 
-      const isDateFound = imputationsMois
-        .map((imputationMois) => imputationMois.imputations)
+      const isDateFound = allocationsByMonth
+        .map((allocationsByMonth) => allocationsByMonth.allocationsByDay)
         .flat()
-        .find((imputationJour) => imputationJour.date === dateString);
+        .find((allocationsByDay) => allocationsByDay.date === dateString);
 
       if (isDateFound && isDateFound?.type === 'workingDay') {
         return 'selected-day';

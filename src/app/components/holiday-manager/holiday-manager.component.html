@@ -1,0 +1,6 @@
+<div class="days-off">
+  <p class="label-imputation">3. Attribuer en congé ou en travail :</p>
+  <button class="working-day-button" [disabled]="!craGeneratorStore.holidayMode()" (click)="activationModeConges()">Imputer travail</button>
+  <button class="day-off-button" [disabled]="craGeneratorStore.holidayMode()" (click)="activationModeConges()">Imputer congé</button>
+  <div class="day-of-count">Jour(s) de congé(s) restant(s) : {{ remainingDayOff }}</div>
+</div>

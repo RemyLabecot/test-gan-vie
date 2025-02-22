@@ -3,10 +3,10 @@
     <h3>{{ subtractMonths(getCurrentMonth(), 3) }}</h3>
     @for(agent of craGeneratorStore.getAgentsByCurrentProject(); track agent.id) {
       <div>
-        <h5>{{ agent.nom }}</h5>
+        <h5>{{ agent.name }}</h5>
         <div>
-          <h6>Jours travaillés : {{ craGeneratorStore.getNumberOfImputationsDaysByMonthAndType("workingDay", agent.id, subtractMonths(getCurrentMonth(), 3)) }} </h6>
-          <h6>Jours de congés : {{ craGeneratorStore.getNumberOfImputationsDaysByMonthAndType("dayOff", agent.id, subtractMonths(getCurrentMonth(), 3)) }} </h6>
+          <h6>Jours travaillés : {{ craGeneratorStore.getNumberOfAllocationsDaysByMonthAndType("workingDay", agent.id, subtractMonths(getCurrentMonth(), 3)) }} </h6>
+          <h6>Jours de congés : {{ craGeneratorStore.getNumberOfAllocationsDaysByMonthAndType("dayOff", agent.id, subtractMonths(getCurrentMonth(), 3)) }} </h6>
         </div>
       </div>
     }
@@ -15,10 +15,10 @@
     <h3>{{ subtractMonths(getCurrentMonth(), 2) }}</h3>
     @for(agent of craGeneratorStore.getAgentsByCurrentProject(); track agent.id) {
       <div>
-        <h5>{{ agent.nom }}</h5>
+        <h5>{{ agent.name }}</h5>
         <div>
-          <h6>Jours travaillés : {{ craGeneratorStore.getNumberOfImputationsDaysByMonthAndType("workingDay", agent.id, subtractMonths(getCurrentMonth(), 2)) }} </h6>
-          <h6>Jours de congés : {{ craGeneratorStore.getNumberOfImputationsDaysByMonthAndType("dayOff", agent.id, subtractMonths(getCurrentMonth(), 2)) }} </h6>
+          <h6>Jours travaillés : {{ craGeneratorStore.getNumberOfAllocationsDaysByMonthAndType("workingDay", agent.id, subtractMonths(getCurrentMonth(), 2)) }} </h6>
+          <h6>Jours de congés : {{ craGeneratorStore.getNumberOfAllocationsDaysByMonthAndType("dayOff", agent.id, subtractMonths(getCurrentMonth(), 2)) }} </h6>
         </div>
       </div>
     }
@@ -27,10 +27,10 @@
     <h3>{{ subtractMonths(getCurrentMonth(), 1) }}</h3>
     @for(agent of craGeneratorStore.getAgentsByCurrentProject(); track agent.id) {
       <div>
-        <h5>{{ agent.nom }}</h5>
+        <h5>{{ agent.name }}</h5>
         <div>
-          <h6>Jours travaillés : {{ craGeneratorStore.getNumberOfImputationsDaysByMonthAndType("workingDay", agent.id, subtractMonths(getCurrentMonth(), 1)) }} </h6>
-          <h6>Jours de congés : {{ craGeneratorStore.getNumberOfImputationsDaysByMonthAndType("dayOff", agent.id, subtractMonths(getCurrentMonth(), 1)) }} </h6>
+          <h6>Jours travaillés : {{ craGeneratorStore.getNumberOfAllocationsDaysByMonthAndType("workingDay", agent.id, subtractMonths(getCurrentMonth(), 1)) }} </h6>
+          <h6>Jours de congés : {{ craGeneratorStore.getNumberOfAllocationsDaysByMonthAndType("dayOff", agent.id, subtractMonths(getCurrentMonth(), 1)) }} </h6>
         </div>
       </div>
     }

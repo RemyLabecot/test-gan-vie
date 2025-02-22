@@ -1,0 +1,8 @@
+<app-generic-dropdown
+  label="Choisir un agent"
+  labelId="agent-select"
+  [options]="agentOptions"
+  [selectedId]="craGeneratorStore.currentSelectedAgentId()"
+  [stepNumber]="2"
+  (selectionChange)="onAgentSelected($event)">
+</app-generic-dropdown>

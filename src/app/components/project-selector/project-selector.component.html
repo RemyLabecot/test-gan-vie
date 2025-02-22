@@ -1,0 +1,8 @@
+<app-generic-dropdown
+  label="Choisir la mission"
+  labelId="project-select"
+  [options]="projectOptions"
+  [selectedId]="craGeneratorStore.currentSelectedProjectId()"
+  [stepNumber]="1"
+  (selectionChange)="selectProject($event)">
+</app-generic-dropdown>

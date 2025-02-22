@@ -1,4 +1,4 @@
-export interface ImputationJour {
+export interface AllocationByDay {
   date: string;
   type: 'workingDay' | 'dayOff';
 }

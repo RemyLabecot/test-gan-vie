@@ -1,7 +1,7 @@
-import {ImputationMois} from './imputation-mois.interface';
+import {AllocationByMonth} from './allocation-by-month.interface';
 
 export interface Agent {
   id: number;
-  nom: string;
-  imputationsParMois: ImputationMois[];
+  name: string;
+  allocationsByMonth: AllocationByMonth[];
 }

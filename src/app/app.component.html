@@ -1,16 +1,18 @@
+<h1 class="banner">OPERATION CRA</h1>
 <div class="app-container">
-  <h1 class="banner">OPERATION CRA</h1>
-  <section class="imputation-section">
-    <div class="imputation-content">
-      <app-agent-imputations
-      ></app-agent-imputations>
-      <app-date-picker
-      ></app-date-picker>
+  <section class="allocation-section">
+    <div class="allocation-content">
+      <div class="allocation-selector">
+        <app-project-selector></app-project-selector>
+        <app-agent-selector></app-agent-selector>
+        <app-holiday-manager></app-holiday-manager>
+      </div>
+      <app-date-picker></app-date-picker>
     </div>
   </section>
 
   <section class="summary-section">
-    <h2>Résumé des trois derniers mois sur le {{ craGeneratorStore.getProjectByCurrentProjectId().nom }}</h2>
+    <h2>Résumé des trois derniers mois sur le {{ craGeneratorStore.getProjectByCurrentProjectId().name }}</h2>
     <app-summary></app-summary>
   </section>
 </div>

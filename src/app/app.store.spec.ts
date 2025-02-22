@@ -25,12 +25,12 @@ describe('CraGeneratorStore', () => {
   });
 
   it('devrait permettre de sélectionner un agent', () => {
-    store.setCurrentSelectedAgent({ id: 2, nom: AgentEnum.AGENT_2, imputationsParMois: [] });
+    store.setCurrentSelectedAgent({ id: 2, name: AgentEnum.AGENT_2, imputationsParMois: [] });
     expect(store.currentSelectedAgentId()).toBe(2);
   });
 
   it('devrait permettre de sélectionner un projet', () => {
-    store.setCurrentSelectedProject({ id: 3, nom: ProjectsEnum.PROJECT_3, agents: [] });
+    store.setCurrentSelectedProject({ id: 3, name: ProjectsEnum.PROJECT_3, agents: [] });
     expect(store.currentSelectedProjectId()).toBe(3);
   });
 

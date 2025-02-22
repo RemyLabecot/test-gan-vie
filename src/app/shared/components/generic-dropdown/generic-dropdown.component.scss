@@ -1,0 +1,25 @@
+.selection-container {
+  border: 2px solid #ff7b00;
+  border-radius: 12px;
+  background-color: #f8f8f8;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+
+  label {
+    font-size: medium;
+    font-weight: bold;
+    margin-bottom: 15px;
+    align-self: flex-start;
+  }
+}
+
+.select-control {
+  padding: 8px;
+  font-size: medium;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
