@@ -36,6 +36,9 @@ const initialState: CraGeneratorState = {
   ],
   currentSelectedAgentId: 1,
   currentSelectedProjectId: 1,
+  currentMonth: '',
+  holidayMode: false,
+  refreshCalendar: false,
 };
 
 export const CraGeneratorStore = signalStore(
@@ -65,10 +68,22 @@ export const CraGeneratorStore = signalStore(
         const index = imputations.findIndex((imp) => imp.date === dateString);
 
         index === -1
-          ? imputations.push({date: dateString, type: 'travail'})
+          ? imputations.push({date: dateString, type: state.holidayMode ? 'dayOff' : 'workingDay'})
           : imputations.splice(index, 1);
+
         state.currentSelectedAgentId = agent.id;
         state.currentSelectedProjectId = project?.id ? project.id : 0;
+      });
+    },
+    refreshHolidayMode() {
+      immerPatchState(store, (state) => {
+        const project = state.projects.find(project => project.id === state?.currentSelectedProjectId);
+        const agent = project?.agents.find(agent => agent.id === state?.currentSelectedAgentId);
+        if (!agent) return;
+        let dayOffImputations = this.getNumberOfAllImputationsDaysByTypeAndAgentId('dayOff', agent.id);
+        if (!(state.holidayMode && dayOffImputations < 7)) {
+          state.holidayMode = false;
+        }
       });
     },
     setCurrentSelectedAgent(agent: Agent | null) {
@@ -79,6 +94,21 @@ export const CraGeneratorStore = signalStore(
     setCurrentSelectedProject(project: Project | null) {
       immerPatchState(store, (state) => {
         state.currentSelectedProjectId = project ? project.id : 0;
+      });
+    },
+    setCurrentMonth(month: string) {
+      immerPatchState(store, (state) => {
+        state.currentMonth = month;
+      });
+    },
+    setWorkMode(workMode: boolean) {
+      immerPatchState(store, (state) => {
+        state.holidayMode = workMode;
+      });
+    },
+    setRefreshCalendar(refresh: boolean) {
+      immerPatchState(store, (state) => {
+        state.refreshCalendar = refresh;
       });
     },
     getAgentsByCurrentProject() {
@@ -100,6 +130,27 @@ export const CraGeneratorStore = signalStore(
         nom: '',
         agents: []
       };
-    }
+    },
+    getNumberOfImputationsDaysByMonth() {
+      return store.projects()
+        .find((project) => project.id === store.currentSelectedProjectId())?.agents
+        .find((agent) => agent.id === store.currentSelectedAgentId())?.imputationsParMois.find((imp) => imp.mois === store.currentMonth())?.imputations.length ?? 0;
+    },
+    getNumberOfImputationsDaysByMonthAndType(type: string, agentId: number, month: string) {
+      return store.projects()
+        .find((project) => project.id === store.currentSelectedProjectId())?.agents
+        .find((agent) => agent.id === agentId)?.imputationsParMois
+        .find((imp) => imp.mois === month)?.imputations
+        .filter((imp) => imp.type === type).length ?? 0;
+    },
+    getNumberOfAllImputationsDaysByTypeAndAgentId(type: string, agentId: number): number {
+        return store.projects()
+          .flatMap(project => project.agents)
+          .filter(agent => agent.id === agentId)
+          .flatMap(agent => agent.imputationsParMois)
+          .flatMap(imputationMois => imputationMois.imputations)
+          .filter(imputationJour => imputationJour.type === type)
+          .length;
+    },
   }))
 );

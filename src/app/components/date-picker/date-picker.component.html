@@ -1,19 +1,15 @@
-<div>
-  <label for="agent-select">Sélectionner un agent :</label>
-  <select id="agent-select" (change)="onAgentSelected($event)">
-    @for(agent of craGeneratorStore.getAgentsByCurrentProject(); track agent.id) {
-      <option [value]="agent.id" [selected]="agent.id === 1">
-        {{ agent.nom }}
-      </option>
-    }
-  </select>
-</div>
-
-<div>
-  <mat-calendar
+<div class="date-picker">
+  <p class="label-date-picker">4. Cliquer sur les jours à imputer :</p>
+  <div>
+    <mat-calendar
       class="calendar-style"
-      [selected]="null"
-                (selectedChange)="toggleDate($event)"
-                [dateClass]="dateClass()" [dateFilter]="dateFilter"
-                ></mat-calendar>
+      [selected]="null" (click)="onViewChanged()"
+      (selectedChange)="toggleDate($event)"
+      [dateClass]="dateClass()" [dateFilter]="dateFilter"
+    ></mat-calendar>
+  </div>
+  <div class="jours-travailles">
+    Jours travaillés : {{ monthDaysWorked }} <br>
+    Jours de congés : {{ monthDaysOff }} <br>
+  </div>
 </div>

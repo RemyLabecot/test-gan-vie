@@ -1,0 +1,28 @@
+<div class="selection-project">
+  <label for="project-select">1. Choisir la mission :</label>
+  <select id="project-select" class="select-project" (change)="selectProject($event)">
+    @for (project of craGeneratorStore.projects(); track project.id) {
+      <option [value]="project.nom" [selected]="project.id === 1">
+        {{ project.nom }}
+      </option>
+    }
+  </select>
+</div>
+
+<div class="selection-agent">
+  <label for="agent-select">2. Choisir un agent :</label>
+  <select id="agent-select" class="select-agent" (change)="onAgentSelected($event)">
+    @for (agent of craGeneratorStore.getAgentsByCurrentProject(); track agent.id) {
+      <option [value]="agent.id" [selected]="agent.id === 1">
+        {{ agent.nom }}
+      </option>
+    }
+  </select>
+</div>
+
+<div class="jours-conges">
+  <p class="label-imputation">3. Attribuer en congé ou en travail : :</p>
+    <button class="working-day-button" [disabled]="!craGeneratorStore.holidayMode()" (click)="activationModeConges()">Imputer travail</button>
+    <button class="day-off-button" [disabled]="craGeneratorStore.holidayMode()" (click)="activationModeConges()">Imputer congé</button>
+  <div class="compteur-conges">Jour(s) de congé(s) restant(s) : {{ remainingDayOff }}</div>
+</div>

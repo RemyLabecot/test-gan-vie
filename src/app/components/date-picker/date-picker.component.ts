@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, computed, inject, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  effect,
+  inject,
+  ViewChild
+} from '@angular/core';
 import {CraGeneratorStore} from '../../app.store';
 import {MatCalendar} from '@angular/material/datepicker';
 import {toFullDateString, toMonthDayString} from '../../utils/date.utils';
@@ -15,6 +23,7 @@ import {toFullDateString, toMonthDayString} from '../../utils/date.utils';
 })
 export class DatePickerComponent {
   craGeneratorStore = inject(CraGeneratorStore);
+  cdr = inject(ChangeDetectorRef);
   @ViewChild(MatCalendar) calendar: MatCalendar<Date> | undefined;
 
   joursFeries = [
@@ -31,22 +40,26 @@ export class DatePickerComponent {
     '12-25', // Noël
   ];
 
-  onAgentSelected(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    const selectedAgentId = Number(selectElement.value);
-    const selectedAgent = this.craGeneratorStore.projects()
-      .find((project) => project.id === this.craGeneratorStore.currentSelectedProjectId())?.agents
-      .find((agent) => agent.id === selectedAgentId);
+  monthDaysWorked = 0;
+  monthDaysOff = 0;
 
-    if (selectedAgent) {
-      this.craGeneratorStore.setCurrentSelectedAgent(selectedAgent);
-    }
-    this.refreshCalendar();
+  constructor() {
+    this.setCurrentMonth();
+    effect(() => {
+      this.monthDaysWorked = this.craGeneratorStore.getNumberOfImputationsDaysByMonthAndType('workingDay', this.craGeneratorStore.currentSelectedAgentId(), this.craGeneratorStore.currentMonth());
+      this.monthDaysOff = this.craGeneratorStore.getNumberOfImputationsDaysByMonthAndType('dayOff', this.craGeneratorStore.currentSelectedAgentId(), this.craGeneratorStore.currentMonth());
+      if(this.craGeneratorStore.refreshCalendar()) {
+        this.refreshCalendar();
+      }
+    });
   }
 
   toggleDate(date: Date | null) {
+    this.setCurrentMonth();
     this.craGeneratorStore.toggleDate(date);
+    this.craGeneratorStore.refreshHolidayMode();
     this.refreshCalendar();
+    this.cdr.markForCheck();
   }
 
   dateFilter = (date: Date | null): boolean => {
@@ -71,11 +84,33 @@ export class DatePickerComponent {
         .flat()
         .find((imputationJour) => imputationJour.date === dateString);
 
-      return isDateFound ? 'selected-day' : '';
+      if (isDateFound && isDateFound?.type === 'workingDay') {
+        return 'selected-day';
+      } else if (isDateFound && isDateFound?.type === 'dayOff') {
+        return 'holy-day';
+      } else {
+        return '';
+      }
     };
   });
 
+  onViewChanged() {
+    if (!this.calendar || !this.calendar.activeDate) {
+      return;
+    }
+    this.setCurrentMonth();
+  }
+
   refreshCalendar() {
     this.calendar?.updateTodaysDate();
+  }
+
+  setCurrentMonth() {
+    let activeDate = this.calendar?.activeDate;
+    if (!activeDate) {
+      return;
+    }
+    let formattedDate = `${activeDate.getFullYear()}-${(activeDate.getMonth() + 1).toString().padStart(2, '0')}`;
+    this.craGeneratorStore.setCurrentMonth(formattedDate);
   }
 }

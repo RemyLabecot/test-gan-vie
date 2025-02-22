@@ -23,14 +23,7 @@ export class AppComponent {
   @ViewChild(DatePickerComponent) datePickerComponent: DatePickerComponent | undefined;
   craGeneratorStore = inject(CraGeneratorStore);
 
-  selectProject(project: string) {
-    const selectedProject = this.craGeneratorStore.projects().find((p) => p.nom === project);
-    if (selectedProject) {
-      this.craGeneratorStore.setCurrentSelectedProject(selectedProject);
-    }
 
-    this.forceRefreshCalendar();
-  }
 
   forceRefreshCalendar() {
     this.datePickerComponent?.refreshCalendar();

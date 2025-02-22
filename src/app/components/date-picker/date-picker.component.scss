@@ -1,9 +1,47 @@
 .calendar-style {
-  width: 200px;
+  max-width: 300px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 ::ng-deep .selected-day {
   background-color: green !important;
   color: white !important;
   border-radius: 50% !important;
+}
+
+::ng-deep .holy-day {
+  background: linear-gradient(270deg,
+    #dd00ff, #ff7f00, #ffff00, #00ff00,
+    #0000ff, #4b0082, #8b00ff, rgba(255, 0, 213, 0.97)) !important;
+  background-size: 400% 400% !important;
+  animation: rainbowAnimation 10s linear infinite !important;
+  color: white !important;
+  border-radius: 50% !important;
+}
+
+.date-picker {
+  flex: 1;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 11px 7px 16px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  height: 425px;
+}
+
+.jours-travailles {
+  font-weight: bold;
+  flex: 1;
+  text-align: left;
+  font-size: small;
+  margin-left: 65px;
+}
+
+.label-date-picker {
+  font-size: medium;
+  font-weight: bold;
+  margin-bottom: 15px;
+  align-self: flex-start;
 }

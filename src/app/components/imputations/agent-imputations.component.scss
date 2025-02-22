@@ -1,0 +1,94 @@
+.jours-conges {
+  flex: 1;
+  text-align: left;
+  padding: 15px;
+  box-shadow: 11px 7px 16px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ff7b00;
+  border-radius: 12px;
+  background-color: #f8f8f8;
+
+  @keyframes rainbowAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  button {
+    color: #040101;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 230px;
+    background-size: 400% 400%;
+    animation: rainbowAnimation 10s linear infinite;
+    transition: background 0.3s ease-in-out;
+
+    &.day-off-button {
+      background: linear-gradient(270deg,
+        #a0e6ff, #b2f0e9, #c3e8ae, #e3f7b6,
+        #fef4c5, #ffdfd4, #ffc0cb, #f8c4ff);
+      border: none;
+      transition: 0.3s ease-in-out;
+
+      &:disabled {
+        cursor: not-allowed;
+        border: 2px solid red !important;
+        pointer-events: none;
+      }
+    }
+    &.working-day-button {
+      background: linear-gradient(270deg,
+        #1d5dbf, #2a7abf, #3594d3, #4ba3df,
+        #62b0e8, #7ebcea, #98c8ed, #b0d4f2);
+      border: none;
+      transition: 0.3s ease-in-out;
+
+      &:disabled {
+        cursor: not-allowed;
+        border: 2px solid red !important;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+.selection-agent, .selection-project {
+  border: 2px solid #ff7b00;
+  border-radius: 12px;
+  background-color: #f8f8f8;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  label {
+    font-size: medium;
+    font-weight: bold;
+    margin-bottom: 15px;
+    align-self: flex-start;
+  }
+}
+
+.select-agent, .select-project {
+  padding: 8px;
+  font-size: medium;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.label-imputation {
+  font-size: medium;
+  font-weight: bold;
+  margin-bottom: 15px;
+  align-self: flex-start;
+}
+
+.compteur-conges {
+  font-size: small;
+  font-weight: bold;
+  margin-bottom: 15px;
+}

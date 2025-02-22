@@ -1,0 +1,39 @@
+@media (max-width: 768px) {
+  .imputation-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .banner {
+    font-size: 20px;
+  }
+}
+.app-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.banner {
+  height: 60px;
+  background-color: #1f69bf;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.imputation-section, .summary-section {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 900px;
+}
+
+.imputation-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}

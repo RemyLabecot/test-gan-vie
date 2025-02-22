@@ -1,4 +1,4 @@
-# Angular Test Groupama Gan Vie
+# Angular Test
 
 ## Installation du projet
 Lancer ces deux commandes l'une après l'autre à la racine du projet :
@@ -9,7 +9,7 @@ Lancer ces deux commandes l'une après l'autre à la racine du projet :
 
 ## Descriptions du projet
 
-### Mission : Groupama Gan Vie - Développement d'une Application de Gestion de Comptes Rendus d'Activité
+### Mission : ******* - Développement d'une Application de Gestion de Comptes Rendus d'Activité
 
 Briefing de la Mission : Agents développeurs, votre nouvelle mission, baptisée "Opération CRA", est de développer une application Angular pour la gestion des comptes rendus d'activité (CRA) de trois de nos meilleurs agents spéciaux.
 
@@ -43,4 +43,15 @@ Technologie de Support :Votre arsenal pour cette mission comprend le modèle de 
 • Manuel de l'Opérateur : Incluez des instructions détaillées dans votre README.md pour que même un novice puisse déployer l'application sans appeler à l'aide.
 
 Note de Briefing : Vous avez une semaine pour mener à bien cette mission. En cas de turbulences ou de questions sur le terrain, votre ligne de communication est toujours ouverte. Lancez-vous, la réussite de cette mission repose sur vos épaules. Bon courage, agent !
-# test-gan-vie
+
+
+## Pour build le projet
+
+ng build --output-path docs --base-href /test-gan-vie/
+
+bouger tout de browser dans docs et supprimer browser
+dupliquer le index.html et le renommer 404.html
+
+remplacer `<base href="C:/Program Files/Git/test-gan-vie/">` par `<base href="/test-gan-vie/">` dans index et 404 html
+
+commit et push le dossier docs sur github
